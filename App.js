@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button} from 'react-native';
+import React, {useState} from 'react';
+import { TextInput,StyleSheet, Text, View, Image, Button} from 'react-native';
 import { initializeApp } from 'firebase/app';
-import { TextInput } from 'react-native-web';
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase, ref, onValue, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAdN3flr7ERb3BqrOiesA1fvRGPXRQuG4A",
@@ -13,8 +15,21 @@ const firebaseConfig = {
   measurementId: "G-CBQDZNE2BD"
 };
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+function storeHighScore(userId, password) {
+  const db = getDatabase();
+  const reference = ref(db, 'users/' + userId);
+  set(reference, {
+    password : password ,
+  });
+}
 
 export default function App() {
+
+
+  storeHighScore('32183538',1111);
+
   return (
     <View style={styles.container}>
       <Image 
