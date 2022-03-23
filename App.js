@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import * as React from 'react';
 import { TextInput,StyleSheet, Text, View, Image, Button} from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, onValue, set } from 'firebase/database';
@@ -25,11 +28,7 @@ function storeHighScore(userId, password) {
   });
 }
 
-export default function App() {
-
-
-  storeHighScore('32183538',1111);
-
+function HomeScreen({ navigation }){
   return (
     <View style={styles.container}>
       <Image 
@@ -41,10 +40,40 @@ export default function App() {
         <TextInput style={{borderBottomColor:'#eee',borderBottomWidth: 1,padding:1,margin:1}} placeholder="id" />
         <TextInput style={{borderBottomColor:'#eee',borderBottomWidth: 1,padding:1,margin:1}} placeholder="password" />
       </View>
-      <Button color="#004898" title = "Sign In"/>
+      <Button 
+        color="#004898" title = "Sign In"
+        onPress={() => navigation.push('Details')}
+      />
       <StatusBar style="auto" />
     </View>
   );
+}
+
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title ="예약하기"/>
+      <Button title ="예약조회"/>
+      <Button title ="QR코드조회"/>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+
+  storeHighScore('32183538',1111);
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+
 }
 
 const styles = StyleSheet.create({
