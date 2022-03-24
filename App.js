@@ -4,57 +4,55 @@ import { TextInput,StyleSheet, Text, View, Image, Button} from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { initializeApp } from 'firebase/app';
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, onValue, set } from 'firebase/database';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAdN3flr7ERb3BqrOiesA1fvRGPXRQuG4A",
-  authDomain: "capstone-7bc19.firebaseapp.com",
-  projectId: "capstone-7bc19",
-  storageBucket: "capstone-7bc19.appspot.com",
-  messagingSenderId: "874632972413",
-  appId: "1:874632972413:web:beb94fbd629467a829c914",
-  measurementId: "G-CBQDZNE2BD"
-};
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-function storeHighScore(userId, password) {
-  const db = getDatabase();
-  const reference = ref(db, 'users/' + userId);
-  set(reference, {
-    password : password ,
-  });
-}
+//import {firebase_db} from "./firebaseConfig"
 
 function HomeScreen({ navigation }){
+/*   const db = getDatabase();
+  const ref = firebase_db.ref(db);
+  console.log(ref);
+ */
   return (
     <View style={styles.container}>
-      <Image 
+     <Image 
         source={require('./dku_logo.png')}
         style={{width:300, height:300}}
       />
       <Text>DKU 스터디룸 예약 시스템 </Text>
+
       <View style={{padding : 50}}>
         <TextInput style={{borderBottomColor:'#eee',borderBottomWidth: 1,padding:1,margin:1}} placeholder="id" />
         <TextInput style={{borderBottomColor:'#eee',borderBottomWidth: 1,padding:1,margin:1}} placeholder="password" />
       </View>
       <Button 
         color="#004898" title = "Sign In"
-        onPress={() => navigation.push('Details')}
+        onPress={() => navigation.push('Second')}
       />
       <StatusBar style="auto" />
     </View>
   );
 }
 
-function DetailsScreen({ navigation }) {
+function SecondScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title ="예약하기"/>
-      <Button title ="예약조회"/>
-      <Button title ="QR코드조회"/>
+      <Image 
+        source={require('./dku_logo.png')}
+        style={{width:300, height:300}}
+      />
+      <Text>DKU 스터디룸</Text>
+      <Button 
+        color="#004898" title ="예약하기"
+        onPress={() => navigation.push('Reservation')}/>
+      <Button color="#004898" title ="예약조회"/>
+      <Button color="#004898" title ="QR코드조회"/>
+    </View>
+  );
+}
+
+function ReservationScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>날짜 선택</Text>     
     </View>
   );
 }
@@ -63,13 +61,12 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  storeHighScore('32183538',1111);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Second" component={SecondScreen} />
+        <Stack.Screen name="Reservation" component={ReservationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
