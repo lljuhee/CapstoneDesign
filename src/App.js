@@ -5,7 +5,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import MyButton from './MyButton';
+import MyButton from '../Component/MyButton';
 //import {firebase_db} from "./firebaseConfig"
 
 function HomeScreen({ navigation }){
