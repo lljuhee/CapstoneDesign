@@ -7,8 +7,29 @@ const Stack = createStackNavigator();
 
 const StackNav = () => {
     return (
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={Login} />
+        <Stack.Navigator 
+          initialRouteName="Login"
+          screenOptions={{
+            cardStyle: { backgroundColor : '#ffffff'},
+            headerStyle: {
+              height : 120,
+              backgroundColor :'#004898',
+            },
+          headerTitleStyle : {
+            fontSize : 24,
+            color: '#ffffff',
+          },
+          headerTitleAlign : 'center',
+
+          headerBackTitle : '',
+          headerBackTitleVisible : false,
+          headerBackTitleStyle: {fontSize:26},
+          headerTintColor : '#ffffff',
+    
+          }}
+        
+        >
+          <Stack.Screen name="Login" component={Login} options = {{ headerShown : false }}/>
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Reservation" component={Reservation} />
           <Stack.Screen name="ReservationInquiry" component={ReservationInquiry} />
