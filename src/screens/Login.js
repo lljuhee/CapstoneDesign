@@ -1,44 +1,41 @@
 import React from 'react';
-import MyButton from '../component/MyButton';
-import { TextInput, Text, View, Image} from 'react-native';
+import { Button, Image, Input } from '../components';
+import { TextInput, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+`;
+
+const LOGO = 'https://firebasestorage.googleapis.com/v0/b/capstone-7bc19.appspot.com/o/dku_logo.png?alt=media';
 
 const Login = ({ navigation }) => {
       return (
-        <View style={styles.container}>
-         <Image 
-            source={require('./dku_logo.png')}
-            style={{width:300, height:300}}
-          />
+        <Container>
+          <Image url = {LOGO} />
           <Text>DKU 스터디룸 예약 시스템 </Text>
-    
-          <View style={{padding : 50}}>
-            <TextInput style={{borderBottomColor:'#eee',borderBottomWidth: 1,padding:1,margin:1}} placeholder="id" />
-            <TextInput style={{borderBottomColor:'#eee',borderBottomWidth: 1,padding:1,margin:1}} placeholder="password" />
-          </View>
-    
-          { /* <TouchableOpacity></TouchableOpacity> */ }
-          <MyButton title = "Sign In" onPress={() => navigation.push('Home')}/>
+
+          <Input
+            label="Student ID"
+            placeholder="Student ID"
+            returnKeyType="next"
+          />
+          <Input
+            label="Password"
+            placeholder="Password"
+            returnKeyType="done"
+            isPassword={true}
+          />
+
+          <Button title = "Sign In" onPress={() => navigation.push('Home')}/>
           <StatusBar style="auto" />
-        </View>
+        </Container>
       );
    
     };
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: '#fff',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        buttonSize:{
-          margin : 10
-        },
-        button:{
-          alignItems: "center",
-          backgroundColor: "#ffffff",
-          padding: 10
-        }
-      }); 
+   
     export default Login;
