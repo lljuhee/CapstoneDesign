@@ -18,7 +18,7 @@ const Home = ({ navigation }) => {
       <Container>
         <Image url = {LOGO} />
         <Text>DKU 스터디룸</Text>
-        <Button title = "예약하기" onPress={() => navigation.push('Reservation')}/>
+        <Button title = "예약하기" onPress={() => navigation.push('SelectDate')}/>
         <Button title = "예약조회" onPress={() => navigation.push('ReservationInquiry')}/>
         <Button title = "QR코드조회" onPress={() => navigation.push('QRInquiry')}/>
         <StatusBar style="auto" />
