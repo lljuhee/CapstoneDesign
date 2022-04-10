@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Login, Home, SelectTime, SelectDate, InfoInput, ReservationInquiry, QRInquiry } from '../screens';
+import { SignIn, SignUp, Home, SelectTime, SelectDate, InfoInput, ReservationInquiry, QRInquiry } from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +29,8 @@ const StackNav = () => {
           }}
         
         >
-          <Stack.Screen name="Login" component={Login} options = {{ headerShown : false }}/>
+          <Stack.Screen name="SignIn" component={SignIn} options = {{ headerShown : false }}/>
+          <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="SelectDate" component={SelectDate} />
           <Stack.Screen name="SelectTime" component={SelectTime} />

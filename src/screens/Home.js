@@ -13,17 +13,18 @@ const Container = styled.View`
 
 const LOGO = 'https://firebasestorage.googleapis.com/v0/b/capstone-7bc19.appspot.com/o/dku_logo.png?alt=media';
 
-const Home = ({ navigation }) => {
-    return (
-      <Container>
-        <Image url = {LOGO} />
-        <Text>DKU 스터디룸</Text>
-        <Button title = "예약하기" onPress={() => navigation.push('SelectDate')}/>
-        <Button title = "예약조회" onPress={() => navigation.push('ReservationInquiry')}/>
-        <Button title = "QR코드조회" onPress={() => navigation.push('QRInquiry')}/>
-        <StatusBar style="auto" />
-      </Container>
-    );
-  };
+const Home = ({ navigation , route }) => {
+  console.log(route.params);
+  return (
+    <Container>
+      <Image url = {LOGO} />
+      <Text>DKU 스터디룸</Text>
+      <Button title = "예약하기" onPress={() => navigation.push('SelectDate')}/>
+      <Button title = "예약조회" onPress={() => navigation.push('ReservationInquiry')}/>
+      <Button title = "QR코드조회" onPress={() => navigation.push('QRInquiry')}/>
+      <StatusBar style="auto" />
+    </Container>
+  );
+};
 
   export default Home;

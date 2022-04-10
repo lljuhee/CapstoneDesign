@@ -1,4 +1,5 @@
-import Login from './Login';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 import Home from './Home';
 import SelectDate from './SelectDate';
 import SelectTime from './SelectTime';
@@ -8,5 +9,5 @@ import QRInquiry from './QRInquiry';
 
 
 
-export { Login, Home, SelectDate, SelectTime, InfoInput, ReservationInquiry, QRInquiry};
+export { SignIn, SignUp, Home, SelectDate, SelectTime, InfoInput, ReservationInquiry, QRInquiry};
 

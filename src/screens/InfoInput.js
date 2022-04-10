@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Image, Input } from '../components';
-import { Text } from 'react-native';
+import { Button, Input } from '../components';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Container = styled.View`
   flex: 1;
@@ -13,34 +13,33 @@ const Container = styled.View`
 
 const InfoInput = ({ navigation }) => {
       return (
-        <Container>
-
-          <Input
-            label="Name"
-            placeholder="Name"
-          />
-          <Input
-            label="Student ID"
-            placeholder="Student ID"
-          />
-           <Input
-            label="Phone Number"
-            placeholder="Phone Number"
-          />
-           <Input
-            label="Member"
-            placeholder="Member"
-          />
-           <Input
-            label="Purpose"
-            placeholder="Purpose"
-          />
-
-          <Button title = "예약하기" onPress={() => navigation.push('')}/>
-          <StatusBar style="auto" />
-        </Container>
-      );
-   
+        <KeyboardAwareScrollView extraScrollHeight={20}>
+          <Container>
+            <Input
+              label="Name"
+              placeholder="Name"
+            />
+            <Input
+              label="Student ID"
+              placeholder="Student ID"
+            />
+            <Input
+              label="Phone Number"
+              placeholder="Phone Number"
+            />
+            <Input
+              label="Member"
+              placeholder="Member"
+            />
+            <Input
+              label="Purpose"
+              placeholder="Purpose"
+            />
+            <Button title = "예약하기" onPress={() => navigation.push('')}/>
+            <StatusBar style="auto" />
+          </Container>
+        </KeyboardAwareScrollView>
+      ); 
     };
    
     export default InfoInput;
