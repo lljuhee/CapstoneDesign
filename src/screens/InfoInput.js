@@ -12,34 +12,19 @@ const Container = styled.View`
 `;
 
 const InfoInput = ({ navigation }) => {
-      return (
-        <KeyboardAwareScrollView extraScrollHeight={20}>
-          <Container>
-            <Input
-              label="Name"
-              placeholder="Name"
-            />
-            <Input
-              label="Student ID"
-              placeholder="Student ID"
-            />
-            <Input
-              label="Phone Number"
-              placeholder="Phone Number"
-            />
-            <Input
-              label="Member"
-              placeholder="Member"
-            />
-            <Input
-              label="Purpose"
-              placeholder="Purpose"
-            />
-            <Button title = "예약하기" onPress={() => navigation.push('')}/>
-            <StatusBar style="auto" />
-          </Container>
-        </KeyboardAwareScrollView>
-      ); 
-    };
-   
-    export default InfoInput;
+  return (
+    <KeyboardAwareScrollView extraScrollHeight={20}>
+      <Container>
+        <Input label="예약자 이름" placeholder="이름" />
+        <Input label="학번" placeholder="학번" />
+        <Input label="핸드폰번호" placeholder="핸드폰번호" />
+        <Input label="사용 인원 수" placeholder="사용 인원 수" />
+        <Input label="사용 목적" placeholder="사용 목적" />
+        <Button title="예약하기" onPress={() => navigation.push('')} />
+        <StatusBar style="auto" />
+      </Container>
+    </KeyboardAwareScrollView>
+  );
+};
+
+export default InfoInput;
