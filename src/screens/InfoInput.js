@@ -20,7 +20,11 @@ const InfoInput = ({ navigation }) => {
         <Input label="핸드폰번호" placeholder="핸드폰번호" />
         <Input label="사용 인원 수" placeholder="사용 인원 수" />
         <Input label="사용 목적" placeholder="사용 목적" />
-        <Button title="예약하기" onPress={() => navigation.push('')} />
+        <Button
+          title="예약하기"
+          onPress={() => navigation.push('')}
+          textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
+        />
         <StatusBar style="auto" />
       </Container>
     </KeyboardAwareScrollView>
