@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialIcons } from '@expo/vector-icons';
 import {
   SignIn,
   SignUp,
@@ -11,14 +12,15 @@ import {
   ReservationInquiry,
   QRInquiry,
 } from '../screens';
+import { theme } from '../theme';
 
 const Stack = createStackNavigator();
 
-const StackNav = () => {
+const StackNav = ({}) => {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         cardStyle: { backgroundColor: '#ffffff' },
         headerStyle: {
           height: 120,
@@ -35,7 +37,16 @@ const StackNav = () => {
         headerBackTitleVisible: false,
         headerBackTitleStyle: { fontSize: 26 },
         headerTintColor: '#ffffff',
-      }}
+        headerRight: () => (
+          <MaterialIcons
+            name="home"
+            size={26}
+            style={{ margin: 10 }}
+            color={theme.background}
+            onPress={() => navigation.navigate('Home')}
+          />
+        ),
+      })}
     >
       <Stack.Screen
         name="SignIn"
