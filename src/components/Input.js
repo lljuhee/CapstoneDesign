@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Container = styled.View`
   flex-direction: column;
   width: 100%;
-  margin: 1px 0;
+  margin: 5px 0;
 `;
 const Label = styled.Text`
   font-size: 14px;
@@ -37,6 +37,7 @@ const Input = forwardRef(
       maxLength,
       isPassword,
       disabled,
+      style,
     },
     ref
   ) => {
@@ -64,6 +65,7 @@ const Input = forwardRef(
           onFocus={() => setIsFocused(true)}
           secureTextEntry={isPassword}
           editable={!disabled}
+          style={style}
         />
       </Container>
     );
@@ -85,6 +87,8 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   isPassword: PropTypes.bool,
   disabled: PropTypes.bool,
+  //margin: PropTypes.number,
+  style: PropTypes.element,
 };
 
 export default Input;

@@ -19,7 +19,12 @@ const InfoInput = ({ navigation }) => {
         <Input label="학번" placeholder="학번" />
         <Input label="핸드폰번호" placeholder="핸드폰번호" />
         <Input label="사용 인원 수" placeholder="사용 인원 수" />
-        <Input label="사용 목적" placeholder="사용 목적" />
+        <Input
+          label="사용 목적"
+          placeholder="사용 목적"
+          style={{ height: 180 }}
+          returnKeyType="next"
+        />
         <Button
           title="예약하기"
           onPress={() => navigation.push('')}
