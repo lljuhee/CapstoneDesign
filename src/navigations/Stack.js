@@ -32,7 +32,6 @@ const StackNav = ({}) => {
           color: '#ffffff',
         },
         headerTitleAlign: 'center',
-
         headerBackTitle: '',
         headerBackTitleVisible: false,
         headerBackTitleStyle: { fontSize: 26 },
