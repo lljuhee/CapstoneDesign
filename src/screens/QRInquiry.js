@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from 'styled-components/native';
 import QRCode from 'react-native-qrcode-svg';
@@ -41,14 +41,37 @@ const QRInquiry = ({}) => {
             borderRadius: 5,
             borderWidth: 2,
             margin: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          <Text>예약 정보</Text>
+          <Text style={styles.dateText}>2022.05.30</Text>
+          <Text style={styles.timeText}>13:00~16:00</Text>
+          <Text style={styles.roomText}>스터디룸 4-2</Text>
         </View>
       </View>
       <StatusBar style="auto" />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  dateText: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    margin: 10,
+  },
+  timeText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'red',
+    margin: 10,
+  },
+  roomText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    margin: 10,
+  },
+});
 
 export default QRInquiry;

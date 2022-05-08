@@ -13,7 +13,7 @@ const Container = styled.View`
 `;
 
 const LOGO =
-  'https://firebasestorage.googleapis.com/v0/b/capstone-7bc19.appspot.com/o/lib_logo.JPG?alt=media';
+  'https://firebasestorage.googleapis.com/v0/b/capstone-7bc19.appspot.com/o/lib_logo.png?alt=media&';
 
 const Home = ({ navigation, route }) => {
   const theme = useContext(ThemeContext);
@@ -22,7 +22,7 @@ const Home = ({ navigation, route }) => {
     <Container>
       <Image
         url={LOGO}
-        style={{ width: 300, height: 70, resizeMode: 'contain' }}
+        style={{ width: 360, height: 100, resizeMode: 'contain', margin: 10 }}
       />
       <Text
         style={{
