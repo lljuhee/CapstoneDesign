@@ -36,18 +36,12 @@ const ItemTime = styled.Text`
   color: ${({ theme }) => theme.itemTime};
 `;
 
-const time = [];
-for (let idx = 9; idx < 20; idx++) {
-  time.push({
-    id: idx,
-    title: `${idx}:00 ~ ${idx}:30`,
-    description: `시간`,
-    createdAt: idx,
-  });
-  if (idx != 19) {
-    time.push({
+const room = [];
+for (let idx = 4; idx < 7; idx++) {
+  for (let n = 1; n < 5; n++) {
+    room.push({
       id: idx,
-      title: `${idx}:30 ~ ${idx + 1}:00`,
+      title: `스터디룸 ${idx}-${n}`,
       description: `시간`,
       createdAt: idx,
     });
@@ -67,17 +61,17 @@ const Item = React.memo(({ item: { title, description, onPress, style } }) => {
   );
 });
 
-const SelectTime = ({ navigation }) => {
+const SelectRoom = ({ navigation }) => {
   const theme = useContext(ThemeContext);
   const [selectedId, setSelectedId] = useState(null);
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 9 }}>
         <FlatList
-          data={time}
+          data={room}
           renderItem={({ item }) => {
             const backgroundColor =
-              item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
+              item.id === selectedId ? '#e84118' : '#f9c2ff';
             return (
               <Item
                 item={item}
@@ -93,7 +87,7 @@ const SelectTime = ({ navigation }) => {
       <View style={{ flex: 1, margin: 10 }}>
         <Button
           title="다음"
-          onPress={() => navigation.push('InfoInput')}
+          onPress={() => navigation.push('SelectTime')}
           textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
         />
         <StatusBar style="auto" />
@@ -102,4 +96,4 @@ const SelectTime = ({ navigation }) => {
   );
 };
 
-export default SelectTime;
+export default SelectRoom;

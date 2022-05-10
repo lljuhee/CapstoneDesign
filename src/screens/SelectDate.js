@@ -55,7 +55,7 @@ const SelectDate = ({ navigation }) => {
       <View style={{ margin: 10 }}></View>
       <Button
         title="다음"
-        onPress={() => navigation.push('SelectTime')}
+        onPress={() => navigation.push('SelectRoom')}
         textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
       />
       <StatusBar style="auto" />

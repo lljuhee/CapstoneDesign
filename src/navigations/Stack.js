@@ -6,8 +6,9 @@ import {
   SignIn,
   SignUp,
   Home,
-  SelectTime,
+  SelectRoom,
   SelectDate,
+  SelectTime,
   InfoInput,
   ReservationInquiry,
   QRInquiry,
@@ -64,9 +65,14 @@ const StackNav = ({}) => {
         options={{ headerTitle: '날짜 선택' }}
       />
       <Stack.Screen
+        name="SelectRoom"
+        component={SelectRoom}
+        options={{ headerTitle: '스터디룸 선택' }}
+      />
+      <Stack.Screen
         name="SelectTime"
         component={SelectTime}
-        options={{ headerTitle: '시간 / 스터디룸 선택' }}
+        options={{ headerTitle: '시간 선택' }}
       />
       <Stack.Screen
         name="InfoInput"
