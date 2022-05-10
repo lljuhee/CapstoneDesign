@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Image, Input } from '../components';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
@@ -24,16 +24,7 @@ const Home = ({ navigation, route }) => {
         url={LOGO}
         style={{ width: 360, height: 100, resizeMode: 'contain', margin: 10 }}
       />
-      <Text
-        style={{
-          color: theme.main,
-          fontSize: 20,
-          fontWeight: 'bold',
-          margin: 10,
-        }}
-      >
-        스터디룸
-      </Text>
+      <View style={{ margin: 45 }}></View>
       <Button
         title="예약하기"
         onPress={() => navigation.push('SelectDate')}

@@ -53,7 +53,11 @@ const StackNav = ({}) => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerTitle: '스터디룸' }}
+      />
       <Stack.Screen
         name="SelectDate"
         component={SelectDate}
