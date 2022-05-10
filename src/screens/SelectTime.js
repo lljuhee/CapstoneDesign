@@ -37,55 +37,61 @@ const ItemTime = styled.Text`
 `;
 
 const time = [];
-for (let idx = 9; idx < 20; idx++) {
+let idx = 0;
+for (let f = 9; f < 20; f++) {
+  idx += 1;
   time.push({
     id: idx,
-    title: `${idx}:00 ~ ${idx}:30`,
+    title: `${f}:00 ~ ${f}:30`,
     description: `시간`,
-    createdAt: idx,
+    createdAt: f,
   });
   if (idx != 19) {
+    idx += 1;
     time.push({
       id: idx,
-      title: `${idx}:30 ~ ${idx + 1}:00`,
+      title: `${f}:30 ~ ${f + 1}:00`,
       description: `시간`,
-      createdAt: idx,
+      createdAt: f,
     });
   }
 }
 
-const Item = React.memo(({ item: { title, description, onPress, style } }) => {
+const Item = React.memo(({ item: { title, description }, onPress, style }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={style}>
-      <ItemContainer>
-        <ItemTextContainer>
-          <ItemTitle>{title}</ItemTitle>
-          {/* <ItemDesc>{description}</ItemDesc> */}
-        </ItemTextContainer>
-      </ItemContainer>
-    </TouchableOpacity>
+    <ItemContainer onPress={onPress} style={style}>
+      <ItemTextContainer>
+        <ItemTitle>{title}</ItemTitle>
+        {/* <ItemDesc>{description}</ItemDesc> */}
+      </ItemTextContainer>
+    </ItemContainer>
   );
 });
 
 const SelectTime = ({ navigation }) => {
   const theme = useContext(ThemeContext);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState();
+  const [allTime, setAllTime] = useState([]);
+
+  const renderItem = ({ item }) => {
+    //id가 selectedId라면 배경색상 변경
+    const backgroundColor = item.id === selectedId ? theme.gray_1 : '#ffffff';
+    return (
+      <Item
+        item={item}
+        //아이템을 클릭하면 selectedId가 변경
+        onPress={() => setSelectedId(item.id)}
+        style={{ backgroundColor }}
+      />
+    );
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 9 }}>
         <FlatList
           data={time}
-          renderItem={({ item }) => {
-            const backgroundColor =
-              item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-            return (
-              <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-              />
-            );
-          }}
+          renderItem={renderItem}
           windowSize={5}
           extraData={selectedId}
         />

@@ -37,49 +37,53 @@ const ItemTime = styled.Text`
 `;
 
 const room = [];
-for (let idx = 4; idx < 7; idx++) {
+let idx = 0;
+for (let f = 4; f < 7; f++) {
   for (let n = 1; n < 5; n++) {
+    idx += 1;
     room.push({
       id: idx,
-      title: `스터디룸 ${idx}-${n}`,
+      title: `스터디룸 ${f}-${n}`,
       description: `시간`,
-      createdAt: idx,
+      //createdAt: idx,
     });
   }
 }
 
-const Item = React.memo(({ item: { title, description, onPress, style } }) => {
+const Item = React.memo(({ item: { title, description }, onPress, style }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={style}>
-      <ItemContainer>
-        <ItemTextContainer>
-          <ItemTitle>{title}</ItemTitle>
-          {/* <ItemDesc>{description}</ItemDesc> */}
-        </ItemTextContainer>
-      </ItemContainer>
-    </TouchableOpacity>
+    <ItemContainer onPress={onPress} style={style}>
+      <ItemTextContainer>
+        <ItemTitle>{title}</ItemTitle>
+        {/* <ItemDesc>{description}</ItemDesc> */}
+      </ItemTextContainer>
+    </ItemContainer>
   );
 });
 
 const SelectRoom = ({ navigation }) => {
   const theme = useContext(ThemeContext);
   const [selectedId, setSelectedId] = useState(null);
+  const renderItem = ({ item }) => {
+    //id가 selectedId라면 배경색상 변경
+    const backgroundColor = item.id === selectedId ? theme.gray_1 : '#ffffff';
+
+    return (
+      <Item
+        item={item}
+        //아이템을 클릭하면 selectedId가 변경
+        onPress={() => setSelectedId(item.id)}
+        style={{ backgroundColor }}
+      />
+    );
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 9 }}>
         <FlatList
           data={room}
-          renderItem={({ item }) => {
-            const backgroundColor =
-              item.id === selectedId ? '#e84118' : '#f9c2ff';
-            return (
-              <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-              />
-            );
-          }}
+          renderItem={renderItem}
           windowSize={5}
           extraData={selectedId}
         />

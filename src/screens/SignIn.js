@@ -72,7 +72,7 @@ const Signin = ({ navigation }) => {
           containerStyle={{ marginTop: 0, backgroundColor: 'transparent' }}
           textStyle={{ color: theme.btnTextLink, fontSize: 12 }}
         />
-        <Button title="test" onPress={() => navigation.navigate('Home')} />
+        {/* <Button title="test" onPress={() => navigation.navigate('Home')} /> */}
         <StatusBar style="auto" />
       </Container>
     </KeyboardAwareScrollView>
