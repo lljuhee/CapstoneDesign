@@ -7,6 +7,7 @@ import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signin } from '../firebase';
 import { Alert } from 'react-native';
+import { createReservation } from '../firebase';
 
 const Container = styled.View`
   flex: 1;

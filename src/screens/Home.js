@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
-import { Button, Image, Input } from '../components';
-import { Text, View } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Button, Image } from '../components';
+import { View, Alert } from 'react-native';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
+import { createReservation } from '../firebase';
+import { getAuth } from 'firebase/auth';
 
 const Container = styled.View`
   flex: 1;
@@ -15,9 +17,22 @@ const Container = styled.View`
 const LOGO =
   'https://firebasestorage.googleapis.com/v0/b/capstone-7bc19.appspot.com/o/lib_logo.png?alt=media&';
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }) => {
   const theme = useContext(ThemeContext);
-  console.log(route.params);
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  const _handleReservationBtnPress = async () => {
+    try {
+      const id = await createReservation({
+        studentid: user.email.substring(0, 8),
+      });
+      navigation.navigate('SelectDate', { user, id });
+    } catch (e) {
+      Alert.alert('Error', e.message);
+    }
+  };
   return (
     <Container>
       <Image
@@ -27,7 +42,7 @@ const Home = ({ navigation, route }) => {
       <View style={{ margin: 45 }}></View>
       <Button
         title="예약하기"
-        onPress={() => navigation.push('SelectDate')}
+        onPress={_handleReservationBtnPress}
         textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
       />
       <Button
