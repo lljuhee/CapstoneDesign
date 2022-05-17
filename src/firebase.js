@@ -1,7 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import config from '../firebase.json';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, collection, doc, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  addDoc,
+} from 'firebase/firestore';
 
 export const app = initializeApp(config);
 
@@ -15,14 +21,35 @@ export const signin = async ({ email, password }) => {
 const db = getFirestore(app);
 
 export const createReservation = async ({ studentid }) => {
-  const channelCollection = collection(db, 'reservations');
-  const newChannelRef = doc(channelCollection);
-  const id = newChannelRef.id;
-  const newChannel = {
+  const reservationCollection = collection(db, 'reservations');
+  const newReservationRef = doc(reservationCollection);
+  const id = newReservationRef.id;
+  const newReservation = {
     id,
-    studentid: studentid,
+    studentId: studentid,
     createdAt: Date.now(),
   };
-  await setDoc(newChannelRef, newChannel);
+  await setDoc(newReservationRef, newReservation);
   return id;
+};
+
+export const addInfo = async ({
+  addName,
+  addStudentId,
+  addPhoneNum,
+  addPeople,
+  addPurpose,
+}) => {
+  try {
+    await addDoc(collection(db, 'reservations'), {
+      name: addName,
+      studentId: addStudentId,
+      phoneNum: addPhoneNum,
+      people: addPeople,
+      purpose: addPurpose,
+    });
+    console.log('Create Complete!');
+  } catch (error) {
+    console.log(error.message);
+  }
 };
