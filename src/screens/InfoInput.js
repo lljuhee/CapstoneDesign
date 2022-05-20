@@ -21,7 +21,7 @@ const InfoInput = ({ navigation }) => {
   const [addPeople, setAddPeople] = useState('');
   const [addPurpose, setAddPurpose] = useState('');
 
-  const _handleReservationBtnPress = async ({ navigation }) => {
+  const _handleReservationBtnPress = async () => {
     try {
       await addInfo({
         addName: addName,
