@@ -5,8 +5,7 @@ import styled from 'styled-components/native';
 import { Button } from '../components';
 import { Calendar } from 'react-native-calendars';
 import { format } from 'date-fns';
-import { theme } from '../theme';
-import { todayString } from 'react-native-calendars/src/expandableCalendar/commons';
+import { updateDate } from '../firebase';
 
 const Container = styled.View`
   flex: 1;
@@ -23,6 +22,17 @@ const SelectDate = ({ navigation }) => {
     [selectedDate]: {
       selected: true,
     },
+  };
+
+  const _handleReservationBtnPress = async () => {
+    try {
+      await updateDate({
+        addDate: selectedDate,
+      });
+      navigation.push('SelectRoom');
+    } catch (e) {
+      Alert.alert('Error', e.message);
+    }
   };
 
   return (
@@ -55,7 +65,7 @@ const SelectDate = ({ navigation }) => {
       <View style={{ margin: 10 }}></View>
       <Button
         title="다음"
-        onPress={() => navigation.push('SelectRoom')}
+        onPress={_handleReservationBtnPress}
         textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
       />
       <StatusBar style="auto" />

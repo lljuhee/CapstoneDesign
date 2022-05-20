@@ -34,7 +34,7 @@ export const createReservation = async ({ studentid }) => {
   return id;
 };
 
-export const updateReservation = async ({
+export const updateInfo = async ({
   addName,
   addStudentId,
   addPhoneNum,
@@ -50,6 +50,20 @@ export const updateReservation = async ({
       phoneNum: addPhoneNum,
       people: addPeople,
       purpose: addPurpose,
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('end');
+  }
+};
+
+export const updateDate = async ({ addDate }) => {
+  const reservationCollection = collection(db, 'reservations');
+  const ReservationRef = doc(reservationCollection, '1');
+  try {
+    await updateDoc(ReservationRef, {
+      date: addDate,
     });
   } catch (e) {
     console.log(e);

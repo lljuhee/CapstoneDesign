@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import firestore from '../firebase';
-import { updateReservation } from '../firebase';
+import { updateInfo } from '../firebase';
 import { Alert } from 'react-native';
 
 const Container = styled.View`
@@ -23,7 +23,7 @@ const InfoInput = ({ navigation }) => {
 
   const _handleReservationBtnPress = async () => {
     try {
-      await updateReservation({
+      await updateInfo({
         addName: addName,
         addStudentId: addStudentId,
         addPhoneNum: addPhoneNum,
