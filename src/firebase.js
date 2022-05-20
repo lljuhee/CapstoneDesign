@@ -7,6 +7,7 @@ import {
   doc,
   setDoc,
   addDoc,
+  updateDoc,
 } from 'firebase/firestore';
 
 export const app = initializeApp(config);
@@ -22,7 +23,7 @@ const db = getFirestore(app);
 
 export const createReservation = async ({ studentid }) => {
   const reservationCollection = collection(db, 'reservations');
-  const newReservationRef = doc(reservationCollection);
+  const newReservationRef = doc(reservationCollection, '1');
   const id = newReservationRef.id;
   const newReservation = {
     id,
@@ -33,23 +34,26 @@ export const createReservation = async ({ studentid }) => {
   return id;
 };
 
-export const addInfo = async ({
+export const updateReservation = async ({
   addName,
   addStudentId,
   addPhoneNum,
   addPeople,
   addPurpose,
 }) => {
+  const reservationCollection = collection(db, 'reservations');
+  const ReservationRef = doc(reservationCollection, '1');
   try {
-    await addDoc(collection(db, 'reservations'), {
+    await updateDoc(ReservationRef, {
       name: addName,
       studentId: addStudentId,
       phoneNum: addPhoneNum,
       people: addPeople,
       purpose: addPurpose,
     });
-    console.log('Create Complete!');
-  } catch (error) {
-    console.log(error.message);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('end');
   }
 };
