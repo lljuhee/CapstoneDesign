@@ -9,6 +9,7 @@ import {
   addDoc,
   updateDoc,
 } from 'firebase/firestore';
+import { format } from 'date-fns';
 
 export const app = initializeApp(config);
 
@@ -22,16 +23,59 @@ export const signin = async ({ email, password }) => {
 const db = getFirestore(app);
 
 export const createReservation = async ({ studentid }) => {
-  const reservationCollection = collection(db, 'reservations');
+  const reservationCollection = collection(db, 'Reservations');
   const newReservationRef = doc(reservationCollection, '1');
   const id = newReservationRef.id;
   const newReservation = {
     id,
-    studentId: studentid,
-    createdAt: Date.now(),
+    StudentId: studentid,
+    //CreatedAt: Date.now(),
+    CreatedAt: format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss'Z'"),
   };
   await setDoc(newReservationRef, newReservation);
   return id;
+};
+
+export const updateDate = async ({ addDate }) => {
+  const reservationCollection = collection(db, 'Reservations');
+  const ReservationRef = doc(reservationCollection, '1');
+  try {
+    await updateDoc(ReservationRef, {
+      Date: addDate,
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('end');
+  }
+};
+
+export const updateRoom = async ({ addRoom }) => {
+  const reservationCollection = collection(db, 'Reservations');
+  const ReservationRef = doc(reservationCollection, '1');
+  try {
+    await updateDoc(ReservationRef, {
+      StudyRoom: addRoom,
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('end');
+  }
+};
+
+export const updateTime = async ({ addTime }) => {
+  const reservationCollection = collection(db, 'Reservations');
+  const ReservationRef = doc(reservationCollection, '1');
+  try {
+    await updateDoc(ReservationRef, {
+      Time: addTime,
+    });
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('end');
+  }
 };
 
 export const updateInfo = async ({
@@ -41,29 +85,15 @@ export const updateInfo = async ({
   addPeople,
   addPurpose,
 }) => {
-  const reservationCollection = collection(db, 'reservations');
+  const reservationCollection = collection(db, 'Reservations');
   const ReservationRef = doc(reservationCollection, '1');
   try {
     await updateDoc(ReservationRef, {
-      name: addName,
-      studentId: addStudentId,
-      phoneNum: addPhoneNum,
-      people: addPeople,
-      purpose: addPurpose,
-    });
-  } catch (e) {
-    console.log(e);
-  } finally {
-    console.log('end');
-  }
-};
-
-export const updateDate = async ({ addDate }) => {
-  const reservationCollection = collection(db, 'reservations');
-  const ReservationRef = doc(reservationCollection, '1');
-  try {
-    await updateDoc(ReservationRef, {
-      date: addDate,
+      Name: addName,
+      StudentId: addStudentId,
+      PhoneNum: addPhoneNum,
+      People: addPeople,
+      Purpose: addPurpose,
     });
   } catch (e) {
     console.log(e);

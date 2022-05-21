@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Text, FlatList, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 import { Button } from '../components';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { updateTime } from '../firebase';
 
 const ItemContainer = styled.TouchableOpacity`
   flex-direction: row;
@@ -71,7 +71,7 @@ const Item = React.memo(({ item: { title, description }, onPress, style }) => {
 const SelectTime = ({ navigation }) => {
   const theme = useContext(ThemeContext);
   const [selectedId, setSelectedId] = useState();
-  const [allTime, setAllTime] = useState([]);
+  const [selectedTime, setSelectedTime] = useState();
 
   const renderItem = ({ item }) => {
     //id가 selectedId라면 배경색상 변경
@@ -80,12 +80,24 @@ const SelectTime = ({ navigation }) => {
       <Item
         item={item}
         //아이템을 클릭하면 selectedId가 변경
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => {
+          setSelectedId(item.id);
+          setSelectedTime(item.title);
+        }}
         style={{ backgroundColor }}
       />
     );
   };
-
+  const _handleNextBtnPress = async () => {
+    try {
+      await updateTime({
+        addTime: selectedTime,
+      });
+      navigation.push('InfoInput');
+    } catch (e) {
+      Alert.alert('Error', e.message);
+    }
+  };
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 9 }}>
@@ -99,7 +111,7 @@ const SelectTime = ({ navigation }) => {
       <View style={{ flex: 1, margin: 10 }}>
         <Button
           title="다음"
-          onPress={() => navigation.push('InfoInput')}
+          onPress={_handleNextBtnPress}
           textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
         />
         <StatusBar style="auto" />
