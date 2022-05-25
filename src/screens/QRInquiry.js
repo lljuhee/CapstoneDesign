@@ -45,9 +45,9 @@ const QRInquiry = ({}) => {
             alignItems: 'center',
           }}
         >
-          <Text style={styles.dateText}>2022.05.30</Text>
-          <Text style={styles.timeText}>13:00~16:00</Text>
-          <Text style={styles.roomText}>스터디룸 4-2</Text>
+          <Text style={styles.dateText}>2022.05.26</Text>
+          <Text style={styles.timeText}>16:00~16:30</Text>
+          <Text style={styles.roomText}>스터디룸 4-1</Text>
         </View>
       </View>
       <StatusBar style="auto" />

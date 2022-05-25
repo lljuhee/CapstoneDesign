@@ -6,8 +6,8 @@ import {
   collection,
   doc,
   setDoc,
-  addDoc,
   updateDoc,
+  getDoc,
 } from 'firebase/firestore';
 import { format } from 'date-fns';
 
@@ -101,3 +101,17 @@ export const updateInfo = async ({
     console.log('end');
   }
 };
+
+export const getReservation = async () => {
+  const reservationCollection = collection(db, 'Reservations');
+  const ReservationRef = doc(reservationCollection, '1');
+
+  const docSnap = await getDoc(ReservationRef);
+  if (docSnap.exists()) {
+    const { data } = docSnap.data();
+    return data;
+  }
+};
+// if (docSnap.exists()) {
+//   return docSnap;
+// }

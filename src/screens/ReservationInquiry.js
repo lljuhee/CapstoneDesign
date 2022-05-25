@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
+import { Button } from '../components';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
+import { getReservation } from '../firebase';
 
 const ItemContainer = styled.TouchableOpacity`
   flex-direction: row;
@@ -57,11 +59,15 @@ const Item = React.memo(({ item: { title, description } }) => {
 
 const ReservationInquiry = ({}) => {
   const theme = useContext(ThemeContext);
+  const date = getReservation().date;
+  //const time = getReservation();
+  const room = getReservation().room;
+
   return (
     <View style={{ flex: 1, backgroundColor: theme.main }}>
       <View
         style={{
-          flex: 3,
+          flex: 4,
           borderColor: theme.main,
           borderRadius: 5,
           borderWidth: 1,
@@ -71,7 +77,35 @@ const ReservationInquiry = ({}) => {
           backgroundColor: theme.background,
         }}
       >
-        <Text style={{ fontSize: 16 }}>현재 예약 내역이 없습니다. </Text>
+        <View
+          style={{ margin: 20, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
+            2022.05.26(목)
+          </Text>
+          <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
+            16:00~16:30
+          </Text>
+          <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
+            스터디룸 4-1
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={{ width: 100, flex: 1, padding: 10 }}>
+            <Button
+              title="예약 변경"
+              textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
+              containerStyle={{ backgroundColor: '#FFC115' }}
+            />
+          </View>
+          <View style={{ width: 100, flex: 1, padding: 10 }}>
+            <Button
+              title="예약 취소"
+              textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
+              containerStyle={{ backgroundColor: '#FFC115' }}
+            />
+          </View>
+        </View>
       </View>
 
       <View
@@ -98,5 +132,13 @@ const ReservationInquiry = ({}) => {
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  button: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    margin: 10,
+    width: 100,
+    backgroundColor: '#004898',
+  },
+});
 export default ReservationInquiry;

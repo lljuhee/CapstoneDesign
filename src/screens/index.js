@@ -5,7 +5,7 @@ import SelectDate from './SelectDate';
 import SelectRoom from './SelectRoom';
 import SelectTime from './SelectTime';
 import InfoInput from './InfoInput';
-import ReservationInquiry from './ReservationInquity';
+import ReservationInquiry from './ReservationInquiry';
 import QRInquiry from './QRInquiry';
 
 export {

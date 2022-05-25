@@ -3,7 +3,6 @@ import { Button, Input } from '../components';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import firestore from '../firebase';
 import { updateInfo } from '../firebase';
 import { Alert } from 'react-native';
 

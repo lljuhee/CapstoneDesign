@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import styled from 'styled-components/native';
 import { Button } from '../components';
 import { Calendar } from 'react-native-calendars';
 import { format } from 'date-fns';
 import { updateDate } from '../firebase';
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 20px;
-`;
 
 const SelectDate = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState(
