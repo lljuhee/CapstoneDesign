@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, View, FlatList, StyleSheet } from 'react-native';
+import { Text, View, FlatList, StyleSheet, Alert } from 'react-native';
 import { Button } from '../components';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
@@ -57,7 +57,7 @@ const Item = React.memo(({ item: { title, description } }) => {
   );
 });
 
-const ReservationInquiry = ({}) => {
+const ReservationInquiry = ({ navigation }) => {
   const theme = useContext(ThemeContext);
   const date = getReservation().date;
   //const time = getReservation();
@@ -96,6 +96,7 @@ const ReservationInquiry = ({}) => {
               title="예약 변경"
               textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
               containerStyle={{ backgroundColor: '#FFC115' }}
+              onPress={() => navigation.navigate('SelectDate')}
             />
           </View>
           <View style={{ width: 100, flex: 1, padding: 10 }}>
@@ -103,6 +104,14 @@ const ReservationInquiry = ({}) => {
               title="예약 취소"
               textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
               containerStyle={{ backgroundColor: '#FFC115' }}
+              onPress={() =>
+                Alert.alert('예약이 취소되었습니다.', '', [
+                  {
+                    text: 'OK',
+                    onPress: () => navigation.navigate('Home'),
+                  },
+                ])
+              }
             />
           </View>
         </View>
