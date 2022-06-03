@@ -4,7 +4,7 @@ import { Button } from '../components';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
-import { getReservation } from '../firebase';
+import { getReservation, deleteReservation } from '../firebase';
 
 const ItemContainer = styled.TouchableOpacity`
   flex-direction: row;
@@ -59,9 +59,19 @@ const Item = React.memo(({ item: { title, description } }) => {
 
 const ReservationInquiry = ({ navigation }) => {
   const theme = useContext(ThemeContext);
-  const date = getReservation().date;
+  // const date = getReservation();
+  const date = JSON.stringify(getReservation());
   //const time = getReservation();
-  const room = getReservation().room;
+  const room = getReservation().Room;
+
+  const _handleCancelBtnPress = async () => {
+    try {
+      await deleteReservation();
+      navigation.push('Home');
+    } catch (e) {
+      Alert.alert('Error', e.message);
+    }
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.main }}>
@@ -89,6 +99,7 @@ const ReservationInquiry = ({ navigation }) => {
           <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
             스터디룸 4-1
           </Text>
+          <Text>{`dddddddd ${date}`} </Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ width: 100, flex: 1, padding: 10 }}>
@@ -108,7 +119,9 @@ const ReservationInquiry = ({ navigation }) => {
                 Alert.alert('예약이 취소되었습니다.', '', [
                   {
                     text: 'OK',
-                    onPress: () => navigation.navigate('Home'),
+                    onPress: () => {
+                      navigation.navigate('Home'), deleteReservation();
+                    },
                   },
                 ])
               }
