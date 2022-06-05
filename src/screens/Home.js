@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Button, Image } from '../components';
 import { View, Alert } from 'react-native';
 import { ThemeContext } from 'styled-components/native';

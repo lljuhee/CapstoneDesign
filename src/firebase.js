@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import config from '../firebase.json';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -8,7 +7,6 @@ import {
   doc,
   setDoc,
   updateDoc,
-  getDoc,
   deleteDoc,
 } from 'firebase/firestore';
 import { format } from 'date-fns';
@@ -103,22 +101,6 @@ export const updateInfo = async ({
     console.log('end');
   }
 };
-
-export const getReservation = async () => {
-  const reservationCollection = collection(db, 'Reservations');
-  const ReservationRef = doc(reservationCollection, '1');
-
-  //const docSnap = await getDoc(ReservationRef);
-
-  getDoc(ReservationRef).then((docSnap) => {
-    if (docSnap.exists()) {
-      return docSnap.data()['Date'];
-    }
-  });
-};
-// if (docSnap.exists()) {
-//   return docSnap;
-// }
 
 export const deleteReservation = async () => {
   const reservationCollection = collection(db, 'Reservations');

@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
-import { Text, View, FlatList, StyleSheet, Alert } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Text, View, FlatList, Alert } from 'react-native';
 import { Button } from '../components';
 import { ThemeContext } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
-import { getReservation, deleteReservation } from '../firebase';
+import { deleteReservation } from '../firebase';
+import { initializeApp } from 'firebase/app';
+import config from '../../firebase.json';
+import { getFirestore, collection, doc, getDoc } from 'firebase/firestore';
 
 const ItemContainer = styled.TouchableOpacity`
   flex-direction: row;
@@ -58,21 +61,31 @@ const Item = React.memo(({ item: { title, description } }) => {
 });
 
 const ReservationInquiry = ({ navigation }) => {
-  const theme = useContext(ThemeContext);
-  // const date = getReservation();
-  const date = JSON.stringify(getReservation());
-  //const time = getReservation();
-  const room = getReservation().Room;
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
+  const [room, setRoom] = useState();
 
-  const _handleCancelBtnPress = async () => {
-    try {
-      await deleteReservation();
-      navigation.push('Home');
-    } catch (e) {
-      Alert.alert('Error', e.message);
+  const getDate = async () => {
+    const app = initializeApp(config);
+    const db = getFirestore(app);
+    const reservationCollection = collection(db, 'Reservations');
+    const ReservationRef = doc(reservationCollection, '1');
+    const docSnap = await getDoc(ReservationRef);
+
+    if (docSnap.exists()) {
+      setDate(docSnap.data().Date);
+      setTime(docSnap.data().Time);
+      setRoom(docSnap.data().StudyRoom);
+    } else {
+      setRoom('현재 예약 내역이 없습니다.');
     }
   };
 
+  useEffect(async () => {
+    await getDate();
+  }, []);
+
+  const theme = useContext(ThemeContext);
   return (
     <View style={{ flex: 1, backgroundColor: theme.main }}>
       <View
@@ -88,21 +101,21 @@ const ReservationInquiry = ({ navigation }) => {
         }}
       >
         <View
-          style={{ margin: 20, justifyContent: 'center', alignItems: 'center' }}
+          style={{ margin: 10, justifyContent: 'center', alignItems: 'center' }}
         >
+          <Text></Text>
           <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
-            2022.05.26(목)
+            {date}
           </Text>
           <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
-            16:00~16:30
+            {time}
           </Text>
           <Text style={{ fontSize: 20, margin: 5, fontWeight: 'bold' }}>
-            스터디룸 4-1
+            {room}
           </Text>
-          <Text>{`dddddddd ${date}`} </Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <View style={{ width: 100, flex: 1, padding: 10 }}>
+          <View style={{ width: 100, flex: 1, margin: 10 }}>
             <Button
               title="예약 변경"
               textStyle={{ fontWeight: 'bold', fontSize: 18, margin: 5 }}
@@ -154,13 +167,5 @@ const ReservationInquiry = ({ navigation }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  button: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    margin: 10,
-    width: 100,
-    backgroundColor: '#004898',
-  },
-});
+
 export default ReservationInquiry;

@@ -7,7 +7,6 @@ import SelectTime from './SelectTime';
 import InfoInput from './InfoInput';
 import ReservationInquiry from './ReservationInquiry';
 import QRInquiry from './QRInquiry';
-import Change from './Change';
 
 export {
   SignIn,
@@ -19,5 +18,4 @@ export {
   InfoInput,
   ReservationInquiry,
   QRInquiry,
-  Change,
 };
