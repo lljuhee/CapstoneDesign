@@ -25,7 +25,7 @@ const QRInquiry = ({}) => {
       setTime(docSnap.data().Time);
       setRoom(docSnap.data().StudyRoom);
     } else {
-      setRoom('현재 예약 내역이 없습니다.');
+      setTime('현재 예약 내역이 없습니다.');
     }
   };
   useEffect(async () => {
@@ -55,7 +55,7 @@ const QRInquiry = ({}) => {
             alignItems: 'center',
           }}
         >
-          <QRCode value="http://awesome.link.qr" size={200} />
+          <QRCode value="https://lib.dankook.ac.kr/" size={200} />
         </View>
         <View
           style={{
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   roomText: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 20,
     margin: 10,
   },
 });

@@ -10,7 +10,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 50px 20px;
+  padding: 40px 20px;
 `;
 
 const InfoInput = ({ navigation }) => {

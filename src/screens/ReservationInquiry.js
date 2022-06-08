@@ -40,14 +40,32 @@ const ItemTime = styled.Text`
 `;
 
 const channels = [];
-for (let idx = 0; idx < 30; idx++) {
+channels.push({
+  id: '0',
+  title: `2022-03-19`,
+  description: `스터디룸 5-3`,
+  //createdAt: idx,
+});
+channels.push({
+  id: '1',
+  title: `2022-04-15`,
+  description: `스터디룸 4-1`,
+  // createdAt: idx,
+});
+channels.push({
+  id: '2',
+  title: `2022-06-02`,
+  description: `스터디룸 6-3`,
+  //createdAt: idx,
+});
+/* for (let idx = 3; idx < 30; idx++) {
   channels.push({
     id: idx,
     title: `YYYY-MM-DD`,
     description: `스터디룸 번호`,
     createdAt: idx,
   });
-}
+} */
 
 const Item = React.memo(({ item: { title, description } }) => {
   return (
@@ -77,7 +95,7 @@ const ReservationInquiry = ({ navigation }) => {
       setTime(docSnap.data().Time);
       setRoom(docSnap.data().StudyRoom);
     } else {
-      setRoom('현재 예약 내역이 없습니다.');
+      setTime('현재 예약 내역이 없습니다.');
     }
   };
 
