@@ -12,7 +12,6 @@ import {
 import { format } from 'date-fns';
 
 export const app = initializeApp(config);
-
 export const auth = getAuth(app);
 
 export const signin = async ({ email, password }) => {
@@ -29,7 +28,6 @@ export const createReservation = async ({ studentid }) => {
   const newReservation = {
     id,
     StudentId: studentid,
-    //CreatedAt: Date.now(),
     CreatedAt: format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss'Z'"),
   };
   await setDoc(newReservationRef, newReservation);

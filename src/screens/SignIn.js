@@ -7,7 +7,6 @@ import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signin } from '../firebase';
 import { Alert } from 'react-native';
-import { createReservation } from '../firebase';
 
 const Container = styled.View`
   flex: 1;
@@ -73,7 +72,6 @@ const Signin = ({ navigation }) => {
           containerStyle={{ marginTop: 0, backgroundColor: 'transparent' }}
           textStyle={{ color: theme.btnTextLink, fontSize: 12 }}
         />
-        {/* <Button title="test" onPress={() => navigation.navigate('Home')} /> */}
         <StatusBar style="auto" />
       </Container>
     </KeyboardAwareScrollView>

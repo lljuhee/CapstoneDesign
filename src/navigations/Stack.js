@@ -12,7 +12,6 @@ import {
   InfoInput,
   ReservationInquiry,
   QRInquiry,
-  Change,
 } from '../screens';
 import { theme } from '../theme';
 
